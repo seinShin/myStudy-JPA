@@ -18,20 +18,25 @@ public class JpaMain {
             //저장
             Team team = new Team();
             team.setName("TeamA");
+//            team.getMembers().add(member);        읽기 전용! -> member에 세팅
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
             em.persist(member);
+
+            team.addMember(member);
+
+            em.flush();
+            em.clear();
 
             //조회
             Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
+            List<Member> members = findMember.getTeam().getMembers();
 
-            //팀 바꿀 때
-//            Team newTeam = em.find(Team.class, 100L);
-//            findMember.setTeam(newTeam);
+            for (Member m : members){
+                System.out.println(m.getUsername());
+            }
             tx.commit();
         } catch (Exception e){
             tx.rollback();
