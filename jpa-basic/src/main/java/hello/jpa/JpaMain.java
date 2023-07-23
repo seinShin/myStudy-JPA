@@ -15,11 +15,23 @@ public class JpaMain {
 
         //코드 작성
         try {
-            Member member = new Member();
-            member.setUsername("C");
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
             em.persist(member);
 
+            //조회
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+
+            //팀 바꿀 때
+//            Team newTeam = em.find(Team.class, 100L);
+//            findMember.setTeam(newTeam);
             tx.commit();
         } catch (Exception e){
             tx.rollback();
