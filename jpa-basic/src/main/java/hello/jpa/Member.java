@@ -22,6 +22,9 @@ public class Member {
 //        team.getMembers().add(this);
 //    }
 
+    @OneToOne
+    @JoinColumn(name="LOCKER_ID")
+    private Locker locker;
     public Long getId() {
         return id;
     }
