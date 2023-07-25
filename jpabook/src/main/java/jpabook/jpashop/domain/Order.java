@@ -16,6 +16,11 @@ public class Order {
     @JoinColumn(name="MEMBER_ID")
     private Member member;
 
+    @OneToOne
+    @JoinColumn(name="DELIVERY_ID")
+    private Delivery delivery;
+
+
     //orderItem 리스트를 추가한다면?
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
