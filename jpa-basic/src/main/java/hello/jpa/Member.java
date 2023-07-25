@@ -30,9 +30,8 @@ public class Member {
     private Locker locker;
 
     //객체 다대다 맵핑
-    @ManyToMany
-    @JoinTable(name="MEMBER_PRODUCT")
-    private List<Product> products = new ArrayList<>();
+    @OneToOne (mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
     public Long getId() {
         return id;
     }
